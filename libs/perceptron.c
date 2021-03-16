@@ -1,13 +1,9 @@
+#include "../libs/headers/perceptron.h"
 #include <assert.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-struct TrainingSet {
-  int inputs[2];
-  int output;
-};
 
 struct TrainingSet *TrainingSet_create(int i1, int i2, int op) {
 

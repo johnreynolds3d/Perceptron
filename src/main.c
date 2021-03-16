@@ -3,11 +3,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-struct TrainingSet {
-  int inputs[2];
-  int output;
-};
-
 int main() {
 
   srand(time(NULL));
