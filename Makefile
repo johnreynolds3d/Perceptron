@@ -1,8 +1,8 @@
-bin/perceptron : src/main.c build/perceptron.o
-	gcc -Wall -o bin/perceptron src/main.c build/perceptron.o
+apps/perceptron : src/main.c build/perceptron.o
+	gcc -Wall -o apps/perceptron src/main.c build/perceptron.o
 
-build/perceptron.o : src/perceptron.c src/perceptron.h
-	gcc -c -Wall -Werror -fpic -o build/perceptron.o src/perceptron.c
+build/perceptron.o : libs/perceptron.c libs/headers/perceptron.h
+	gcc -c -Wall -Werror -fpic -o build/perceptron.o libs/perceptron.c
 
 clean : 
-	rm bin/perceptron build/perceptron.o
+	rm apps/perceptron build/perceptron.o

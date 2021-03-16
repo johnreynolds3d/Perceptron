@@ -1,4 +1,4 @@
-#include "perceptron.h"
+#include "../libs/headers/perceptron.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
