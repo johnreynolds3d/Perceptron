@@ -1,1 +1,1 @@
-valgrind --leak-check=yes -s ./bin/perceptron 
+valgrind --leak-check=yes -s ./bin/linux/perceptron 
