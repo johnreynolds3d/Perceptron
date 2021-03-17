@@ -7,4 +7,4 @@ build/perceptron.o : lib/perceptron.c lib/headers/perceptron.h
 	gcc -c -fpic -o build/perceptron.o lib/perceptron.c
 
 clean : 
-	rm bin/perceptron build/perceptron.o
+	rm bin/perceptron build/perceptron.o 
