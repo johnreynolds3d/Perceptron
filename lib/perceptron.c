@@ -41,7 +41,6 @@ double calc_dot_product_bias(int num_weights, double *weights, int num_inputs,
 
   assert(weights != NULL);
   assert(inputs != NULL);
-
   assert(num_weights == num_inputs);
 
   double dot_product_bias = 0;
@@ -59,8 +58,9 @@ int calc_output(int num_weights, double *weights, double input_1,
                 double input_2, double *bias) {
 
   double inputs[] = {input_1, input_2};
-  double dot_product_bias =
-      calc_dot_product_bias(num_weights, weights, 2, inputs, bias);
+  double dot_product_bias = calc_dot_product_bias(
+      num_weights, weights, (int)(sizeof(inputs) / sizeof(double)), inputs,
+      bias);
 
   return (dot_product_bias > 0) ? 1 : 0;
 }
@@ -90,12 +90,12 @@ void train(int num_training_sets, struct TrainingSet **training_sets,
 
   initialise_weights(num_weights, weights, bias);
 
-  printf("\tWeights: %9f  %9f    Bias: %9f\n\nThen the training begins...\n\n",
+  printf("\tWeights: %9f  %9f\tBias: %9f\n\nThen the training begins...\n\n",
          weights[0], weights[1], *bias);
 
   for (int i = 0; i < num_epochs; i++) {
 
-    printf("\tEpoch %d:\n", i + 1);
+    printf("Epoch %d:\n", i + 1);
 
     *total_error = 0;
 
@@ -103,10 +103,9 @@ void train(int num_training_sets, struct TrainingSet **training_sets,
 
       update_weights(training_sets, num_weights, weights, bias, total_error, j);
 
-      printf("\tWeights: %9f  %9f    Bias: %9f\n", weights[0], weights[1],
-             *bias);
+      printf("\tWeights: %9f  %9f\tBias: %9f\n", weights[0], weights[1], *bias);
     }
 
-    printf("\tTotal Error: %d\n\n", (int)*total_error);
+    printf("\n\tTotal Error: %d\n\n", (int)*total_error);
   }
 }

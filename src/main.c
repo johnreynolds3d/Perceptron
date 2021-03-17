@@ -9,7 +9,7 @@ int main() {
 
   int num_weights = 2;
   int num_training_sets = 4;
-  int num_epochs = 6;
+  int num_epochs = 8;
 
   double weights[num_weights];
 
@@ -53,7 +53,7 @@ int main() {
     train(num_training_sets, training_sets, num_weights, weights, bias,
           total_error, num_epochs);
 
-    printf("And here's where I show what I've learnt:\n\n");
+    printf("\nAnd here's where I show what I've learnt:\n\n");
 
     printf("\tTest [0 0] %d\n", calc_output(num_weights, weights, 0, 0, bias));
     printf("\tTest [0 1] %d\n", calc_output(num_weights, weights, 0, 1, bias));
