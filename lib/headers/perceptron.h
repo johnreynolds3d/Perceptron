@@ -6,23 +6,28 @@ struct TrainingSet {
   int output;
 };
 
-extern struct TrainingSet *TrainingSet_create(int i1, int i2, int op);
+extern struct TrainingSet *TrainingSet_create(int input_1, int input_2,
+                                              int output);
 
-extern void TrainingSet_destroy(struct TrainingSet *ts);
+extern void TrainingSet_destroy(struct TrainingSet *training_set);
 
-extern void TrainingSet_print(struct TrainingSet *ts);
+extern void TrainingSet_print(struct TrainingSet *training_set);
 
-extern void initialise_weights(int sw, double *w, double *b);
+extern void initialise_weights(int num_weights, double *weights, double *bias);
 
-extern double dot_product_bias(int sw, double *w, int si, double *inp,
-                               double *b);
+extern double calc_dot_product_bias(int num_weights, double *weights,
+                                    int num_inputs, double *inputs,
+                                    double *bias);
 
-extern int calc_output(int sw, double *w, double i1, double i2, double *b);
+extern int calc_output(int num_weights, double *weights, double input_1,
+                       double input_2, double *bias);
 
-extern void update_weights(struct TrainingSet **tsa, int sw, double *w,
-                           double *b, double *te, int j);
+extern void update_weights(struct TrainingSet **training_sets, int num_weights,
+                           double *weights, double *bias, double *total_error,
+                           int j);
 
-extern void train(int ns, struct TrainingSet **tsa, int sw, double *w,
-                  double *b, double *te, int e);
+extern void train(int num_sets, struct TrainingSet **training_sets,
+                  int num_weights, double *weights, double *bias,
+                  double *total_error, int num_epochs);
 
 #endif

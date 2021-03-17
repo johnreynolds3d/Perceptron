@@ -5,102 +5,108 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct TrainingSet *TrainingSet_create(int i1, int i2, int op) {
+struct TrainingSet *TrainingSet_create(int input_1, int input_2, int output) {
 
-  struct TrainingSet *ts = malloc(sizeof(struct TrainingSet));
-  assert(ts != NULL);
+  struct TrainingSet *training_set = malloc(sizeof(struct TrainingSet));
+  assert(training_set != NULL);
 
-  ts->inputs[0] = i1;
-  ts->inputs[1] = i2;
-  ts->output = op;
+  training_set->inputs[0] = input_1;
+  training_set->inputs[1] = input_2;
+  training_set->output = output;
 
-  return ts;
+  return training_set;
 }
 
-void TrainingSet_destroy(struct TrainingSet *ts) {
-  assert(ts != NULL);
-  free(ts);
+void TrainingSet_destroy(struct TrainingSet *training_set) {
+  assert(training_set != NULL);
+  free(training_set);
 }
 
-void TrainingSet_print(struct TrainingSet *ts) {
-  printf("\t[%d %d] %d\n", ts->inputs[0], ts->inputs[1], ts->output);
+void TrainingSet_print(struct TrainingSet *training_set) {
+  printf("\t[%d %d] %d\n", training_set->inputs[0], training_set->inputs[1],
+         training_set->output);
 }
 
-void initialise_weights(int sw, double *w, double *b) {
+void initialise_weights(int num_weights, double *weights, double *bias) {
 
-  for (int i = 0; i < sw; i++) {
-    w[i] = (double)rand() / RAND_MAX * 2.0 - 1.0;
+  for (int i = 0; i < num_weights; i++) {
+    weights[i] = (double)rand() / RAND_MAX * 2.0 - 1.0;
   }
 
-  *b = (double)rand() / RAND_MAX * 2.0 - 1.0;
+  *bias = (double)rand() / RAND_MAX * 2.0 - 1.0;
 }
 
-double dot_product_bias(int sw, double *w, int si, double *inp, double *b) {
+double calc_dot_product_bias(int num_weights, double *weights, int num_inputs,
+                             double *inputs, double *bias) {
 
-  if (w == NULL || inp == NULL) {
-    return 1;
+  assert(weights != NULL);
+  assert(inputs != NULL);
+
+  assert(num_weights == num_inputs);
+
+  double dot_product_bias = 0;
+
+  for (int i = 0; i < num_weights; i++) {
+    dot_product_bias = dot_product_bias + (weights[i] * inputs[i]);
   }
 
-  if (sw != si) {
-    return 1;
-  }
+  dot_product_bias = dot_product_bias + *bias;
 
-  double d = 0;
-
-  for (int i = 0; i < sw; i++) {
-    d += w[i] * inp[i];
-  }
-
-  d += *b;
-  return d;
+  return dot_product_bias;
 }
 
-int calc_output(int sw, double *w, double i1, double i2, double *b) {
+int calc_output(int num_weights, double *weights, double input_1,
+                double input_2, double *bias) {
 
-  double inp[] = {i1, i2};
-  double dp =
-      dot_product_bias(sw, w, (int)(sizeof(inp) / sizeof(double)), inp, b);
+  double inputs[] = {input_1, input_2};
+  double dot_product_bias =
+      calc_dot_product_bias(num_weights, weights, 2, inputs, bias);
 
-  return (dp > 0) ? 1 : 0;
+  return (dot_product_bias > 0) ? 1 : 0;
 }
 
-void update_weights(struct TrainingSet **tsa, int sw, double *w, double *b,
-                    double *te, int j) {
+void update_weights(struct TrainingSet **training_sets, int num_weights,
+                    double *weights, double *bias, double *total_error, int j) {
 
-  double error = tsa[j]->output -
-                 calc_output(sw, w, tsa[j]->inputs[0], tsa[j]->inputs[1], b);
+  double error = training_sets[j]->output -
+                 calc_output(num_weights, weights, training_sets[j]->inputs[0],
+                             training_sets[j]->inputs[1], bias);
 
-  *te += fabs(error);
+  *total_error = *total_error + fabs(error);
 
-  for (int i = 0; i < sw; i++) {
-    w[i] = w[i] + error * tsa[j]->inputs[i];
+  for (int i = 0; i < num_weights; i++) {
+    weights[i] = weights[i] + (error * training_sets[j]->inputs[i]);
   }
 
-  *b += error;
+  *bias = *bias + error;
 }
 
-void train(int ns, struct TrainingSet **tsa, int sw, double *w, double *b,
-           double *te, int e) {
+void train(int num_training_sets, struct TrainingSet **training_sets,
+           int num_weights, double *weights, double *bias, double *total_error,
+           int num_epochs) {
 
   printf("I start out by setting my weights and bias to random numbers between "
          "-1 and 1:\n\n");
 
-  initialise_weights(sw, w, b);
+  initialise_weights(num_weights, weights, bias);
 
   printf("\tWeights: %9f  %9f    Bias: %9f\n\nThen the training begins...\n\n",
-         w[0], w[1], *b);
+         weights[0], weights[1], *bias);
 
-  for (int i = 0; i < e; i++) {
+  for (int i = 0; i < num_epochs; i++) {
 
     printf("\tEpoch %d:\n", i + 1);
 
-    *te = 0;
+    *total_error = 0;
 
-    for (int j = 0; j < ns; j++) {
-      update_weights(tsa, sw, w, b, te, j);
-      printf("\tWeights: %9f  %9f    Bias: %9f\n", w[0], w[1], *b);
+    for (int j = 0; j < num_training_sets; j++) {
+
+      update_weights(training_sets, num_weights, weights, bias, total_error, j);
+
+      printf("\tWeights: %9f  %9f    Bias: %9f\n", weights[0], weights[1],
+             *bias);
     }
 
-    printf("\tTotal Error: %d\n\n", (int)*te);
+    printf("\tTotal Error: %d\n\n", (int)*total_error);
   }
 }
