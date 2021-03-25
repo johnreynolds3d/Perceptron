@@ -1,4 +1,5 @@
 #include "../lib/headers/perceptron.h"
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -15,12 +16,17 @@ int main() {
 
   struct TrainingSet *training_sets[num_training_sets];
 
-  int i, j, k;
+  int i = 0;
+  int j = 0;
+  int k = 0;
 
   for (i = 0; i < 2; i++) {
 
-    double *bias = malloc(sizeof(double));
-    double *total_error = malloc(sizeof(double));
+    double *bias = calloc(1, sizeof(double));
+    assert(bias != NULL);
+
+    double *total_error = calloc(1, sizeof(double));
+    assert(total_error != NULL);
 
     if (i < 1) {
 
