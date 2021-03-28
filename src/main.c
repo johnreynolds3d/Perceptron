@@ -8,17 +8,17 @@ int main() {
 
   srand(time(NULL));
 
-  int num_weights = 2;
-  int num_training_sets = 4;
-  int num_epochs = 8;
+  unsigned int num_weights = 2;
+  unsigned int num_training_sets = 4;
+  unsigned int num_epochs = 8;
 
   double weights[num_weights];
 
   struct TrainingSet *training_sets[num_training_sets];
 
-  int i = 0;
-  int j = 0;
-  int k = 0;
+  unsigned int i = 0;
+  unsigned int j = 0;
+  unsigned int k = 0;
 
   for (i = 0; i < 2; i++) {
 
