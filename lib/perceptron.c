@@ -5,9 +5,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct TrainingSet *TrainingSet_create(int input_1, int input_2, int output) {
+TrainingSet *TrainingSet_create(int input_1, int input_2, int output) {
 
-  struct TrainingSet *training_set = calloc(1, sizeof(struct TrainingSet));
+  TrainingSet *training_set = calloc(1, sizeof(TrainingSet));
   assert(training_set != NULL);
 
   training_set->inputs[0] = input_1;
@@ -18,12 +18,12 @@ struct TrainingSet *TrainingSet_create(int input_1, int input_2, int output) {
   return training_set;
 }
 
-void TrainingSet_destroy(struct TrainingSet *training_set) {
+void TrainingSet_destroy(TrainingSet *training_set) {
   assert(training_set != NULL);
   free(training_set);
 }
 
-void TrainingSet_print(struct TrainingSet *training_set) {
+void TrainingSet_print(TrainingSet *training_set) {
   assert(training_set != NULL);
   printf("\t[%d %d] %d\n", training_set->inputs[0], training_set->inputs[1],
          training_set->output);
@@ -74,7 +74,7 @@ int calc_output(int num_weights, double *weights, double input_1,
   return (dot_product_bias > 0) ? 1 : 0;
 }
 
-void update_weights(struct TrainingSet **training_sets, int num_weights,
+void update_weights(TrainingSet **training_sets, int num_weights,
                     double *weights, double *bias, double *total_error, int j) {
 
   assert(training_sets != NULL && weights != NULL && bias != NULL &&
@@ -95,9 +95,8 @@ void update_weights(struct TrainingSet **training_sets, int num_weights,
   *bias = *bias + error;
 }
 
-void train(int num_training_sets, struct TrainingSet **training_sets,
-           int num_weights, double *weights, double *bias, double *total_error,
-           int num_epochs) {
+void train(int num_training_sets, TrainingSet **training_sets, int num_weights,
+           double *weights, double *bias, double *total_error, int num_epochs) {
 
   assert(training_sets != NULL && weights != NULL && bias != NULL &&
          total_error != NULL);

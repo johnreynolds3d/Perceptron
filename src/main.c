@@ -14,7 +14,7 @@ int main() {
 
   double weights[num_weights];
 
-  struct TrainingSet *training_sets[num_training_sets];
+  TrainingSet *training_sets[num_training_sets];
 
   unsigned int i = 0;
   unsigned int j = 0;
