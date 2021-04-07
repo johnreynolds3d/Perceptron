@@ -8,25 +8,20 @@ int main() {
 
   srand(time(NULL));
 
-  unsigned int num_weights = 2;
-  unsigned int num_training_sets = 4;
-  unsigned int num_epochs = 8;
+  int num_weights = 2;
+  int num_training_sets = 4;
+  int num_epochs = 8;
 
   double weights[num_weights];
 
   TrainingSet *training_sets[num_training_sets];
 
-  unsigned int i = 0;
-  unsigned int j = 0;
-  unsigned int k = 0;
+  int i, j;
 
   for (i = 0; i < 2; i++) {
 
-    double *bias = calloc(1, sizeof(double));
-    assert(bias != NULL);
-
-    double *total_error = calloc(1, sizeof(double));
-    assert(total_error != NULL);
+    double bias = 0;
+    double total_error = 0;
 
     if (i < 1) {
 
@@ -56,24 +51,21 @@ int main() {
 
     printf("\nNow for the learning part... Wish me luck!\n\n");
 
-    train(num_training_sets, training_sets, num_weights, weights, bias,
-          total_error, num_epochs);
+    train(num_training_sets, training_sets, num_weights, weights, &bias,
+          &total_error, num_epochs);
 
     printf("\nAnd here's where I show what I've learnt:\n\n");
 
-    printf("\tTest [0 0] %d\n", calc_output(num_weights, weights, 0, 0, bias));
-    printf("\tTest [0 1] %d\n", calc_output(num_weights, weights, 0, 1, bias));
-    printf("\tTest [1 0] %d\n", calc_output(num_weights, weights, 1, 0, bias));
-    printf("\tTest [1 1] %d\n", calc_output(num_weights, weights, 1, 1, bias));
+    printf("\tTest [0 0] %d\n", calc_output(num_weights, weights, 0, 0, &bias));
+    printf("\tTest [0 1] %d\n", calc_output(num_weights, weights, 0, 1, &bias));
+    printf("\tTest [1 0] %d\n", calc_output(num_weights, weights, 1, 0, &bias));
+    printf("\tTest [1 1] %d\n", calc_output(num_weights, weights, 1, 1, &bias));
 
     printf("\n");
 
-    for (k = 0; k < num_training_sets; k++) {
-      TrainingSet_destroy(training_sets[k]);
+    for (j = 0; j < num_training_sets; j++) {
+      TrainingSet_destroy(training_sets[j]);
     }
-
-    free(bias);
-    free(total_error);
   }
 
   return 0;
