@@ -1,4 +1,4 @@
-## An implementation of a perceptron in C
+## A Perceptron implemented in C
 
 https://en.wikipedia.org/wiki/Perceptron
 
