@@ -18,6 +18,8 @@ int main() {
 
   int i, j;
 
+  printf("\n\n");
+
   for (i = 0; i < 2; i++) {
 
     double bias = 0;
@@ -48,6 +50,7 @@ int main() {
     for (j = 0; j < num_training_sets; j++) {
       TrainingSet_print(training_sets[j]);
     }
+    printf("\n");
 
     printf("\nNow for the learning part... Wish me luck!\n\n");
 
@@ -67,6 +70,8 @@ int main() {
       TrainingSet_destroy(training_sets[j]);
     }
   }
+
+  printf("\n\n");
 
   return 0;
 }
