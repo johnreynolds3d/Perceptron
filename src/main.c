@@ -16,14 +16,14 @@ int main() {
 
   TrainingSet *training_sets[num_training_sets];
 
-  int i, j;
+  int i = 0, j = 0;
 
   printf("\n\n");
 
   for (i = 0; i < 2; i++) {
 
-    double bias = 0;
-    double total_error = 0;
+    double bias = 0.0;
+    double total_error = 0.0;
 
     if (i < 1) {
 

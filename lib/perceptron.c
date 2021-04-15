@@ -7,7 +7,7 @@
 
 TrainingSet *TrainingSet_create(int input_1, int input_2, int output) {
 
-  TrainingSet *training_set = calloc(1, sizeof(TrainingSet));
+  TrainingSet *training_set = malloc(sizeof(TrainingSet));
   assert(training_set != NULL);
 
   training_set->inputs[0] = input_1;
