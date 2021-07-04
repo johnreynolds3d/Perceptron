@@ -1,5 +1,6 @@
 #include "../lib/headers/perceptron.h"
 #include <assert.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -8,22 +9,25 @@ int main() {
 
   srand(time(NULL));
 
-  int num_weights = 2;
-  int num_training_sets = 4;
-  int num_epochs = 8;
+  uint8_t num_weights = 2;
+  uint8_t num_training_sets = 4;
+  uint8_t num_epochs = 8;
 
   double weights[num_weights];
 
   TrainingSet *training_sets[num_training_sets];
 
-  int i = 0, j = 0;
+  register uint8_t i = 0, j = 0;
 
   printf("\n\n");
 
+  double bias;
+  double total_error;
+
   for (i = 0; i < 2; i++) {
 
-    double bias = 0.0;
-    double total_error = 0.0;
+    bias = 0.0;
+    total_error = 0.0;
 
     if (i < 1) {
 

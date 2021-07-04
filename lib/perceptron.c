@@ -1,6 +1,7 @@
 #include "headers/perceptron.h"
 #include <assert.h>
 #include <math.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -22,7 +23,7 @@ void initialise_weights(int num_weights, double *weights, double *bias) {
 
   assert(weights != NULL && bias != NULL);
 
-  for (int i = 0; i < num_weights; i++) {
+  for (register uint8_t i = 0; i < num_weights; i++) {
     weights[i] = (double)rand() / RAND_MAX * 2.0 - 1.0;
   }
 
@@ -43,13 +44,13 @@ void train(int num_training_sets, TrainingSet **training_sets, int num_weights,
   printf("\tWeights: %9f  %9f\tBias: %9f\n\nThen the training begins...\n\n",
          weights[0], weights[1], *bias);
 
-  for (int i = 0; i < num_epochs; i++) {
+  for (register uint8_t i = 0; i < num_epochs; i++) {
 
     printf("Epoch %d:\n", i + 1);
 
     *total_error = 0;
 
-    for (int j = 0; j < num_training_sets; j++) {
+    for (register uint8_t j = 0; j < num_training_sets; j++) {
       update_weights(training_sets, num_weights, weights, bias, total_error, j);
       printf("\tWeights: %9f  %9f\tBias: %9f\n", weights[0], weights[1], *bias);
     }
@@ -65,7 +66,7 @@ double calc_dot_product_bias(int num_weights, double *weights, int num_inputs,
 
   double dot_product_bias = 0;
 
-  for (int i = 0; i < num_weights; i++) {
+  for (register uint8_t i = 0; i < num_weights; i++) {
     dot_product_bias = dot_product_bias + (weights[i] * inputs[i]);
   }
   dot_product_bias = dot_product_bias + *bias;
@@ -99,7 +100,7 @@ void update_weights(TrainingSet **training_sets, int num_weights,
 
   *total_error = *total_error + fabs(error);
 
-  for (int i = 0; i < num_weights; i++) {
+  for (register uint8_t i = 0; i < num_weights; i++) {
     weights[i] = weights[i] + (error * training_sets[j]->inputs[i]);
   }
 
