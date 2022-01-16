@@ -36,8 +36,8 @@ void train(int num_training_sets, TrainingSet **training_sets, int num_weights,
   assert(training_sets != NULL && weights != NULL && bias != NULL &&
          total_error != NULL);
 
-  printf("I start out by setting my weights and bias to random numbers between "
-         "-1 and 1:\n\n");
+  puts("I start out by setting my weights and bias to random numbers between "
+       "-1 and 1:\n");
 
   initialise_weights(num_weights, weights, bias);
 
@@ -46,15 +46,14 @@ void train(int num_training_sets, TrainingSet **training_sets, int num_weights,
 
   for (register uint8_t i = 0; i < num_epochs; i++) {
 
-    printf("Epoch %d:\n", i + 1);
-
     *total_error = 0;
+
+    printf("Epoch %d:\n", i + 1);
 
     for (register uint8_t j = 0; j < num_training_sets; j++) {
       update_weights(training_sets, num_weights, weights, bias, total_error, j);
       printf("\tWeights: %9f  %9f\tBias: %9f\n", weights[0], weights[1], *bias);
     }
-
     printf("\n\tTotal Error: %d\n\n", (int)*total_error);
   }
 }
@@ -103,21 +102,16 @@ void update_weights(TrainingSet **training_sets, int num_weights,
   for (register uint8_t i = 0; i < num_weights; i++) {
     weights[i] = weights[i] + (error * training_sets[j]->inputs[i]);
   }
-
   *bias = *bias + error;
 }
 
 void TrainingSet_print(TrainingSet *training_set) {
-
   assert(training_set != NULL);
-
   printf("\t[%d %d] %d\n", training_set->inputs[0], training_set->inputs[1],
          training_set->output);
 }
 
 void TrainingSet_destroy(TrainingSet *training_set) {
-
   assert(training_set != NULL);
-
   free(training_set);
 }

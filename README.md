@@ -6,6 +6,8 @@ https://en.wikipedia.org/wiki/Perceptron
 
 This binary classifier is capable of learning to perform the logical OR and AND operations!
 
+![Screenshot](/img/perceptron.webp?raw=true "")
+
 *Clever girl...*
 
 ## Installation
@@ -18,39 +20,28 @@ This binary classifier is capable of learning to perform the logical OR and AND 
      ```
      # cd perceptron
      ```
-  3. Run make (on Linux; not sure about Windows atm...)
+  3. Run make 
      ```
-     # make -C build/linux
+     # make 
      ```
-     or, if you're on a Mac
+  4. Then run the program
      ```
-     # make -C build/mac
-     ```
-  4. Then run the program (on Linux) with
-     ```
-     # ./bin/linux/perceptron
-     ```
-     on Mac
-     ```
-     # ./bin/mac/perceptron
+     # ./bin/perceptron
      ```
 
 ## Tests
 
 I've been using Valgrind to highlight potential memory issues. 
 
-On Linux, run
+To test with Valgrind, run
 ```
-# sh test/runtests.sh
+# sh test.sh
 ```
 
 ## Credits
 
 This is based on Penny de Byl's fabulous https://www.udemy.com/course/machine-learning-with-unity/
 
-## Built with
+## License
 
-  * Pop!\_OS 20.10
-  * Vim 8.2
-  * Valgrind 3.18.0
-  * gcc 10.2.0
+MIT &copy; John Reynolds
