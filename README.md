@@ -1,6 +1,6 @@
 # perceptron
 
-### A basic implementation of a Perceptron in C
+### Follow the amazing adventures of our intrepid Binary Classifier as it attempts to learn and perform the logical OR and AND functions!
 
 https://en.wikipedia.org/wiki/Perceptron
 
@@ -33,7 +33,7 @@ This binary classifier is capable of learning to perform the logical OR and AND 
 
 I've been using Valgrind to highlight potential memory issues. 
 
-To test with Valgrind, run
+To test with Valgrind
 ```
 # sh test.sh
 ```
