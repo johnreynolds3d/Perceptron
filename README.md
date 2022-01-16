@@ -38,7 +38,7 @@ To test with Valgrind
 
 ## Credits
 
-This is based on Penny de Byl's fabulous https://www.udemy.com/course/machine-learning-with-unity/
+This project is based on Penny de Byl's fabulous https://www.udemy.com/course/machine-learning-with-unity/
 
 ## License
 
