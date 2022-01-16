@@ -69,16 +69,13 @@ int main() {
     printf("\tTest [0 0] %d\n", calc_output(num_weights, weights, 0, 0, &bias));
     printf("\tTest [0 1] %d\n", calc_output(num_weights, weights, 0, 1, &bias));
     printf("\tTest [1 0] %d\n", calc_output(num_weights, weights, 1, 0, &bias));
-    printf("\tTest [1 1] %d\n", calc_output(num_weights, weights, 1, 1, &bias));
-
-    printf("\n");
+    printf("\tTest [1 1] %d\n\n",
+           calc_output(num_weights, weights, 1, 1, &bias));
 
     for (j = 0; j < num_training_sets; j++) {
       TrainingSet_destroy(training_sets[j]);
     }
   }
-
-  puts("\n");
 
   return 0;
 }
