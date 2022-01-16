@@ -22,7 +22,7 @@ https://en.wikipedia.org/wiki/Perceptron
      ```
      # make 
      ```
-  4. Then run the program
+  4. Run the program
      ```
      # ./bin/perceptron
      ```
@@ -37,8 +37,7 @@ To test with Valgrind
 ```
 
 ## Credits
-
-This project is based on Penny de Byl's fabulous https://www.udemy.com/course/machine-learning-with-unity/
+This project is based on Penny de Byl's fabulous 'A Beginner's Guide To Machine Learning with Unity': https://www.udemy.com/course/machine-learning-with-unity/
 
 ## License
 
