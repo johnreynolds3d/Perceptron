@@ -31,14 +31,10 @@ https://en.wikipedia.org/wiki/Perceptron
 
 I've been using Valgrind to highlight potential memory issues. 
 
-To test with Valgrind
+To test with Valgrind, run
 ```
 # sh test.sh
 ```
 
 ## Credits
 This project is based on Penny de Byl's fabulous 'A Beginner's Guide To Machine Learning with Unity': https://www.udemy.com/course/machine-learning-with-unity/
-
-## License
-
-MIT &copy; John Reynolds
