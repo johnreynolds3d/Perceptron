@@ -1,4 +1,4 @@
-#include "headers/perceptron.h"
+#include "../lib/perceptron.h"
 #include <assert.h>
 #include <math.h>
 #include <stdint.h>

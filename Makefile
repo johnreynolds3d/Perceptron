@@ -1,10 +1,11 @@
 CFLAGS = -std=c17 -Wall -Werror -Wextra -Wpedantic -g -O2
 
-bin/perceptron : src/main.c build/perceptron.o
-	gcc -o bin/perceptron src/main.c build/perceptron.o -lm
+bin/perceptron : src/main.c obj/perceptron.o
+	gcc -o bin/perceptron src/main.c obj/perceptron.o -lm
 
-build/perceptron.o : lib/perceptron.c lib/headers/perceptron.h
-	gcc -c -fpic -o build/perceptron.o lib/perceptron.c
+obj/perceptron.o : src/perceptron.c lib/perceptron.h
+	gcc -c -fpic -o obj/perceptron.o src/perceptron.c
 
+.PHONY: clean
 clean : 
-	rm bin/perceptron build/perceptron.o
+	rm bin/perceptron obj/perceptron.o
