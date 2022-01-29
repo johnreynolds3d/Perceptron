@@ -13,8 +13,8 @@ void initialise_weights(int num_weights, double *weights, double *bias);
 void train(int num_sets, TrainingSet **training_sets, int num_weights,
            double *weights, double *bias, double *total_error, int num_epochs);
 
-double calc_dot_product_bias(int num_weights, double *weights, int num_inputs,
-                             double *inputs, double *bias);
+double calc_dot_product_bias(int num_weights, double *weights, double *inputs,
+                             double *bias);
 
 int calc_output(int num_weights, double *weights, double input_1,
                 double input_2, double *bias);

@@ -58,8 +58,8 @@ void train(int num_training_sets, TrainingSet **training_sets, int num_weights,
   }
 }
 
-double calc_dot_product_bias(int num_weights, double *weights, int num_inputs,
-                             double *inputs, double *bias) {
+double calc_dot_product_bias(int num_weights, double *weights, double *inputs,
+                             double *bias) {
 
   assert(weights != NULL && inputs != NULL && bias != NULL);
 
@@ -80,9 +80,8 @@ int calc_output(int num_weights, double *weights, double input_1,
 
   double inputs[] = {input_1, input_2};
 
-  double dot_product_bias = calc_dot_product_bias(
-      num_weights, weights, (int)(sizeof(inputs) / sizeof(double)), inputs,
-      bias);
+  double dot_product_bias =
+      calc_dot_product_bias(num_weights, weights, inputs, bias);
 
   return (dot_product_bias > 0) ? 1 : 0;
 }
