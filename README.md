@@ -33,7 +33,7 @@ I've been using Valgrind to highlight potential memory issues.
 
 To test with Valgrind, run
 ```
-# sh src/test/test.sh
+# sh memtest.sh
 ```
 
 ## Credits
