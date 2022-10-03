@@ -1,4 +1,4 @@
-# perceptron
+# Perceptron
 
 **Follow the amazing adventures of our intrepid [Perceptron](https://en.wikipedia.org/wiki/Perceptron) (AKA *Binary Classifier*) as it attempts to learn and perform the logical OR and AND functions!**
 
